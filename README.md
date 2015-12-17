@@ -26,6 +26,7 @@ The following dependencies are necessary:
 To build the application, run the following command on the root folder of the repository:
 
     mvn clean install 
+    mvn exec:java -Dexec.mainClass="com.cammy.Simulation"
 
 
 ### Implemantion Overview ###
