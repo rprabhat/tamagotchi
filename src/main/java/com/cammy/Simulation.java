@@ -7,6 +7,8 @@ import com.cammy.state.PhysicalState;
 import java.util.Scanner;
 
 /**
+ *  SImulate tamagotchi behaviour over time based on user input
+ *
  * Created by prabhatranjan on 16/12/2015.
  */
 public class Simulation {
@@ -29,13 +31,13 @@ public class Simulation {
         String input = inputReader.next().toLowerCase();
 
         if (input.equals("s")) {
-            step();
+            step(Config.SIMULATION_STEP_HOUR);
 
         } else if (input.equals("f")) {
             tamagotchi.feed(10);
 
         } else if (input.equals("b")) {
-            tamagotchi.setPhysicalState(PhysicalStages.SLEEPING);
+            tamagotchi.putToBed();
 
         } else if (input.equals("x")) {
             shutDown();
@@ -52,24 +54,23 @@ public class Simulation {
 
     // Step through simulation.
     // It simulates passage of time. Changes internal state.
-    private void step() {
+    private void step(Integer stepHours) {
 
         LifeState lifeState = tamagotchi.getLifeState();
         PhysicalState physicalState = tamagotchi.getPhysicalState();
         Integer age = tamagotchi.getAge();
         Integer hungerIndex = tamagotchi.getHungerIndex();
 
-        currentHour += Config.SIMULATION_STEP_HOUR;
+        currentHour += stepHours;
         if(currentHour > 24) {
             currentDay =+ 1;
             currentHour = currentHour % 24;
             age =+1;
         }
-        tamagotchi.setAge(age);
 
-        // Losses energy as time passes.
-        if(tamagotchi.getHungerIndex() > 0)
-            tamagotchi.setHungerIndex(hungerIndex - Config.HUNGER_INDEX_LOSS_PER_STEP);
+        // Losses energy and get aged as time passes.
+        tamagotchi.loseHealth(stepHours);
+        tamagotchi.setAge(age);
 
         lifeState.action(tamagotchi);
         physicalState.action(tamagotchi, currentHour);

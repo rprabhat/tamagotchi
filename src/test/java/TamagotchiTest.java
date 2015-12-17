@@ -75,9 +75,44 @@ public class TamagotchiTest {
         currentState.action(tamagotchi, Config.SLEEP_HOUR_END + 1);
         assertEquals(PhysicalStages.AWAKE, tamagotchi.getPhysicalState());
 
-        currentState = tamagotchi.getPhysicalState(); tamagotchi.setHungerIndex(Config.HIGH_ENERGY_LEVEL);
-        tamagotchi.setAge(Config.CHILD_AGE_LIMIT); currentState.action(tamagotchi,Config.SLEEP_HOUR_START + 1);
+        currentState = tamagotchi.getPhysicalState();
+        tamagotchi.setHungerIndex(Config.HIGH_ENERGY_LEVEL);
+        currentState.action(tamagotchi,Config.SLEEP_HOUR_START + 1);
         assertEquals(PhysicalStages.SLEEPING, tamagotchi.getPhysicalState());
 
     }
+
+    @Test
+    public void testPoopOnFixedTime() {
+
+        PhysicalState currentState = tamagotchi.getPhysicalState();
+        assertEquals(PhysicalStages.SLEEPING, currentState);
+
+        currentState.action(tamagotchi, Config.SLEEP_HOUR_END + 1);
+        assertEquals(PhysicalStages.AWAKE, tamagotchi.getPhysicalState());
+
+        currentState = tamagotchi.getPhysicalState();
+        //tamagotchi.setHungerIndex(90);
+        currentState.action(tamagotchi, Config.MORNING_POOP_TIME);
+        assertEquals(PhysicalStages.POOPING, tamagotchi.getPhysicalState());
+
+    }
+
+    @Test
+    public void testPoopOverEating() {
+
+        PhysicalState currentState = tamagotchi.getPhysicalState();
+        assertEquals(PhysicalStages.SLEEPING, currentState);
+
+        currentState.action(tamagotchi, Config.SLEEP_HOUR_END + 1);
+        assertEquals(PhysicalStages.AWAKE, tamagotchi.getPhysicalState());
+
+        currentState = tamagotchi.getPhysicalState();
+        tamagotchi.setHungerIndex(101);
+        currentState.action(tamagotchi, Config.AFTERNOON);
+        assertEquals(PhysicalStages.POOPING, tamagotchi.getPhysicalState());
+
+    }
+
+
 }

@@ -17,8 +17,9 @@ public class Config {
     public final static Integer SLEEP_HOUR_END = 5;
     public final static Integer MORNING_POOP_TIME = 8;
     public final static Integer EVENING_POOP_TIME = 16;
+    public final static Integer AFTERNOON = 12;
 
     public final static Integer SIMULATION_STEP_HOUR = 4;
-    public final static Integer HUNGER_INDEX_LOSS_PER_STEP = 5;
+    public final static Integer HUNGER_INDEX_LOSS_PER_HOUR = 2;
 
 }

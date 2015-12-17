@@ -4,6 +4,29 @@ import com.cammy.Config;
 import com.cammy.Tamagotchi;
 
 /**
+ * Physical stages in which tamagotchi can move between
+ *
+ * AWAKE
+ *    -- time between sleeping hours SLEEPING
+ *    -- over eating or at scheduled poop time POOPING
+ *    -- Stomach full  EXICTED
+ *    -- Stomach empty HUNGARY
+ *
+ *  HUNGARY
+ *    -- Stomach full, will jump. move to  EXICTED
+ *    -- enough food.  back to AWAKE
+ *    -- not feed, die of hunger DEAD
+ *
+ *   EXICTED
+ *    -- if losses lots of  engery due to jumping, HUNGARY again
+ *    -- if in enough energy level, back to AWAKE
+ *
+ *    POOPING
+ *    -- move TO AWAKE, after pooping
+ *
+ *    SLEEPING
+ *     -- if after wake up time , move to AWAKE
+ *
  * Created by prabhatranjan on 16/12/2015.
  */
 public enum PhysicalStages implements PhysicalState {
@@ -52,9 +75,9 @@ public enum PhysicalStages implements PhysicalState {
         public void action(Tamagotchi tamagotchi, Integer currentHour) {
 
             // engery loss due to jumping
-            tamagotchi.setHungerIndex(tamagotchi.getHungerIndex() - 10);
+            tamagotchi.loseHealth(Config.SIMULATION_STEP_HOUR * 2);
 
-            // if energy less than threshold, change stage
+            // if energy less than threshold, change state
             if (tamagotchi.getHungerIndex() < Config.HUNGER_LEVEL)
                 tamagotchi.setPhysicalState(HUNGARY);
             else if (tamagotchi.getHungerIndex() > Config.HUNGER_LEVEL &&
@@ -64,8 +87,7 @@ public enum PhysicalStages implements PhysicalState {
     },
     POOPING {
 
-        public String getDescription() {  return "Pooping.. please look away :)";
-        }
+        public String getDescription() {  return "Pooping.. please look away :)";}
         public void action(Tamagotchi tamagotchi, Integer currentHour) {
             tamagotchi.setPhysicalState(AWAKE);
         }

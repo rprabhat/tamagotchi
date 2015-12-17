@@ -1,16 +1,15 @@
 # Tamagotchi  #
 
-[tamagotchi](http://en.wikipedia.org/wiki/Tamagotchi).
-
-A sample project to demonstrate its behaviour through time.
+A sample project to demonstrate [tamagotchi](http://en.wikipedia.org/wiki/Tamagotchi) behaviour through time.
 
 Currently following has been implemented :
-    - Growing old with time ( life cycle, BABY, CHILD, TEEN, ADULT, OLD )
-    - Changing physical state through the day. ( AWAKE, HUNGARY, EXICTED, POOPING,  SLEEPING)
-    - Can die  either due to hunger or old age.
-    
 
-It changes tamagotchi behaviour based on internal state. 
+ - Growing old with time ( life cycle, BABY, CHILD, TEEN, ADULT, OLD )
+ - Changing physical state through the day. ( AWAKE, HUNGARY, EXICTED, POOPING,  SLEEPING)
+ - Can die  either due to hunger or old age.
+ - Poop at scheduled time or in case of over eating.
+
+
 
 ### Installation dependencies ###
 
@@ -28,8 +27,10 @@ To build the application, run the following command on the root folder of the re
 
     mvn clean install 
 
+
 ### Implemantion Overview ###
 
+Tamagotchi changes  behaviour based on internal state. 
 Tamagotchi internal state ( both life cycle and physical ) is implemented using state pattern.
 Currently, tt run in single thread only prompting user to take action. 
 User can step through simulation, feed, put it bed or exit the application.

@@ -4,6 +4,10 @@ import com.cammy.Config;
 import com.cammy.Tamagotchi;
 
 /**
+ * Life stages in which tamagotchi can move between  based on age
+ *
+ * BABY, CHILD, TEEN, ADULT, OLD, DEAD
+ *
  * Created by prabhatranjan on 16/12/2015.
  */
 public enum LifeStages implements LifeState {
